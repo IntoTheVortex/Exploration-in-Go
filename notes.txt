@@ -1,0 +1,1 @@
+restrictions on generics make it not possible to use the generic as a map key. what's the answer here, cast to string or something else?
