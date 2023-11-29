@@ -2,18 +2,17 @@ package main
 
 import "fmt"
 
-
 type Graph[V comparable] interface {
 	Empty() Graph[V]
-	AddVertex(V) 
+	AddVertex(V)
 	AddEdge(V, V)
-	Neighbors(func(V,V) V, V, V) bool
+	Neighbors(func(V, V) V, V, V) bool
 }
 
 type Set[T comparable] map[T]struct{}
 
 //type Vertex[T comparable] struct {
-	//Data T
+//Data T
 //}
 
 type HashGraph[T comparable] struct {
@@ -21,7 +20,7 @@ type HashGraph[T comparable] struct {
 }
 
 // Set functions *********************************************
-func EmptySet[T comparable]() Set[T]{
+func EmptySet[T comparable]() Set[T] {
 	return make(Set[T])
 }
 
@@ -48,7 +47,7 @@ func Empty[T comparable]() *HashGraph[T] {
 func (g *HashGraph[T]) AddVertex(v T) error {
 	_, exists := g.vertices[v]
 	if exists {
-		return fmt.Errorf("vertex already in graph") 
+		return fmt.Errorf("vertex already in graph")
 	} else {
 		g.vertices[v] = EmptySet[T]()
 	}
@@ -59,12 +58,14 @@ func (g *HashGraph[T]) AddEdge(v1 T, v2 T) {
 	g.AddVertex(v1)
 	g.AddVertex(v2)
 	_set := Set[T](g.vertices[v1])
-	_set.Add(v2)//TODO
+	_set.Add(v2)
 	g.vertices[v1] = _set
 }
 
-func (g *HashGraph[T]) Neighbors(v1 T, f func(T, any)) {
-
+func (g *HashGraph[T]) Neighbors(v1 T, f func(T)) {
+	for u := range g.vertices[v1] {
+		f(u)
+	}
 }
 
 func (g *HashGraph[T]) Print() {
@@ -78,15 +79,22 @@ func (g *HashGraph[T]) Print() {
 	}
 }
 
+//TODO fix
+//test Neighbors with dfs
+func (g *HashGraph[T]) DFS(v T) {
+	fmt.Printf("%v ", v)
+	g.Neighbors(v, g.DFS)
+}
+
 func main() {
 	fmt.Println("hello")
 
 	graphInt := Empty[int]()
-	graphStr:= Empty[string]()
+	graphStr := Empty[string]()
 
 	c := 'A'
 	v_prev := 0
-	for i:=0; i<10; i++ {
+	for i := 0; i < 10; i++ {
 		v1 := i
 		v2 := string(c)
 		c++
@@ -102,5 +110,6 @@ func main() {
 	}
 	graphInt.Print()
 	graphStr.Print()
+	graphInt.DFS(2)
 
 }
