@@ -1,1 +1,8 @@
 restrictions on generics make it not possible to use the generic as a map key. what's the answer here, cast to string or something else?
+used comparable
+
+TODO:
+improve DFS
+improve example graphs
+more print stmts to show progress
+write up README - howto, goals
