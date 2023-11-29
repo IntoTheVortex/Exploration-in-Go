@@ -44,22 +44,19 @@ func Empty[T comparable]() *HashGraph[T] {
 	}
 }
 
-func (g *HashGraph[T]) AddVertex(v T) error {
+func (g *HashGraph[T]) AddVertex(v T) {
 	_, exists := g.vertices[v]
 	if exists {
-		return fmt.Errorf("vertex already in graph")
+		return
 	} else {
 		g.vertices[v] = EmptySet[T]()
 	}
-	return nil
 }
 
 func (g *HashGraph[T]) AddEdge(v1 T, v2 T) {
 	g.AddVertex(v1)
 	g.AddVertex(v2)
-	_set := Set[T](g.vertices[v1])
-	_set.Add(v2)
-	g.vertices[v1] = _set
+	Set[T](g.vertices[v1]).Add(v2)
 }
 
 func (g *HashGraph[T]) Neighbors(v1 T, f func(T)) {
@@ -79,7 +76,7 @@ func (g *HashGraph[T]) Print() {
 	}
 }
 
-//TODO fix
+// no, I think it works fine
 //test Neighbors with dfs
 func (g *HashGraph[T]) DFS(v T) {
 	fmt.Printf("%v ", v)
