@@ -7,7 +7,7 @@ type set[T comparable] map[T]struct{}
 
 //lowercase so not exportable
 type hashGraph[T comparable] struct {
-	vertices map[T]map[T]struct{}
+	vertices    map[T]map[T]struct{}
 	visited_set set[T]
 }
 
@@ -30,11 +30,19 @@ func (s set[T]) Contains(item T) bool {
 }
 
 // Graph functions *********************************************
+
+//This has to be out of class in order to provide the intended functionality
 func Empty[T comparable]() *hashGraph[T] {
 	return &hashGraph[T]{
-		vertices: make(map[T]map[T]struct{}),
+		vertices:    make(map[T]map[T]struct{}),
 		visited_set: EmptySet[T](),
 	}
+}
+
+//This one has to be in the class in order to ensure hashGraph implements
+// the graph interface
+func (g *hashGraph[T]) Empty() Graph[T] {
+	return Empty[T]() //call the standalone version to properly implement interface
 }
 
 func (g *hashGraph[T]) AddVertex(v T) {

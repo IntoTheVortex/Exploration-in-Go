@@ -2,9 +2,18 @@ restrictions on generics make it not possible to use the generic as a map key. w
 used comparable
 
 upset that go doesn't have a set!! have to use a map to approximate
+which makes the hashmap a map to a map
+
+am I implementing interface? how to prove?
+ref: https://stackoverflow.com/questions/72034479/how-to-implement-generic-interfaces
+return from func
+
+dear god on high pointer receivers.....
 
 TODO:
-improve DFS
-improve example graphs
+DONE improve DFS
+DONE improve example graphs
+DONE prove interface implementation
 more print stmts to show progress
 write up README - howto, goals
+get final build for exe, as extra for final zip

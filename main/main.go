@@ -5,6 +5,10 @@ import (
 	"main/graph"
 )
 
+func DemonstrateInterface[T comparable](t T) graph.Graph[T] {
+	return graph.Empty[T]()
+}
+
 func main() {
 	graphInt := graph.Empty[int]()
 	graphStr := graph.Empty[string]()
