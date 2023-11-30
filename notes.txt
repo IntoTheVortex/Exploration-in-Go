@@ -1,6 +1,8 @@
 restrictions on generics make it not possible to use the generic as a map key. what's the answer here, cast to string or something else?
 used comparable
 
+upset that go doesn't have a set!! have to use a map to approximate
+
 TODO:
 improve DFS
 improve example graphs

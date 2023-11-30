@@ -8,6 +8,7 @@ type set[T comparable] map[T]struct{}
 //lowercase so not exportable
 type hashGraph[T comparable] struct {
 	vertices map[T]map[T]struct{}
+	visited_set set[T]
 }
 
 // Set functions *********************************************
@@ -32,6 +33,7 @@ func (s set[T]) Contains(item T) bool {
 func Empty[T comparable]() *hashGraph[T] {
 	return &hashGraph[T]{
 		vertices: make(map[T]map[T]struct{}),
+		visited_set: EmptySet[T](),
 	}
 }
 
@@ -69,6 +71,17 @@ func (g *hashGraph[T]) Print() {
 
 //test Neighbors with dfs
 func (g *hashGraph[T]) DFS(v T) {
+	_, exists := g.visited_set[v]
+	if exists {
+		return
+	}
 	fmt.Printf("%v ", v)
+	g.visited_set.Add(v)
 	g.Neighbors(v, g.DFS)
+}
+
+//only need to demonstrate DFS once, so not necessary
+// but it is available if need to search again
+func (g *hashGraph[T]) ClearVisited() {
+	g.visited_set = EmptySet[T]()
 }
