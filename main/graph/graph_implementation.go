@@ -21,12 +21,6 @@ func (s set[T]) add(item T) {
 	s[item] = struct{}{}
 }
 
-/* Unused function
-func (s set[T]) remove(item T) {
-	delete(s, item)
-}
-*/
-
 
 // Graph functions *********************************************
 
