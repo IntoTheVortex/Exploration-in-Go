@@ -1,0 +1,36 @@
+Directed Graph in Go
+CS558 Programming Languages 
+Fall 2023
+Amber Shore
+
+An executable has been provided in case of build issues.
+
+To build, in the terminal in the top level folder ('main') run 'go mod init main'.
+Alternately, the provided go.mod file may suffice and you can enter 'go get main'.
+The folder structure under main defines the graph package, and should 
+remain in the original structure.
+
+Goals:
+1: The interface is expressed separately from the implementation.
+This goal was met, using the package structure that Go provides.
+It was not necessary and would seem bad practice to many Go programmers,
+from what I've read.
+
+2: The interface and implementation are parametrically polymorphic
+over the type of vertices in the graph.
+Yes, the Graph can use any data type that fulfills the comparable type
+constraint. All vertices in a Graph instance are of a single type.
+
+3: The language enforces that the graph representation is 
+hidden from client code.
+Yes. This is demonstrated by some commented out code in main.go.
+in the buildIntGraph function. 
+
+4: The graph type implementation can be changed with minimal
+impact on client code.
+Yes, the client has no access to the implementation, so as long as it
+implements the Graph interface it will work the same.
+
+5: Interface and implementation can be compiled separately from the
+client.
+Yes, it is possible to compile them separately.
