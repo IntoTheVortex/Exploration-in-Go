@@ -11,27 +11,27 @@ type hashGraph[T comparable] struct {
 	visited_set set[T]
 }
 
+
 // Set functions *********************************************
 func EmptySet[T comparable]() set[T] {
 	return make(set[T])
 }
 
-func (s set[T]) Add(item T) {
+func (s set[T]) add(item T) {
 	s[item] = struct{}{}
 }
 
-func (s set[T]) Remove(item T) {
+/* Unused function
+func (s set[T]) remove(item T) {
 	delete(s, item)
 }
+*/
 
-func (s set[T]) Contains(item T) bool {
-	_, exists := s[item]
-	return exists
-}
 
 // Graph functions *********************************************
 
-//This has to be out of class in order to provide the intended functionality
+//This has to be outside of the class in order to 
+// provide the intended functionality
 func Empty[T comparable]() *hashGraph[T] {
 	return &hashGraph[T]{
 		vertices:    make(map[T]map[T]struct{}),
@@ -39,8 +39,8 @@ func Empty[T comparable]() *hashGraph[T] {
 	}
 }
 
-//This one has to be in the class in order to ensure hashGraph implements
-// the graph interface
+//This one has to be in the class in order to ensure 
+// hashGraph implements the graph interface
 func (g *hashGraph[T]) Empty() Graph[T] {
 	return Empty[T]() //call the standalone version to properly implement interface
 }
@@ -57,7 +57,7 @@ func (g *hashGraph[T]) AddVertex(v T) {
 func (g *hashGraph[T]) AddEdge(v1 T, v2 T) {
 	g.AddVertex(v1)
 	g.AddVertex(v2)
-	set[T](g.vertices[v1]).Add(v2)
+	set[T](g.vertices[v1]).add(v2)
 }
 
 func (g *hashGraph[T]) Neighbors(v1 T, f func(T)) {
@@ -66,6 +66,7 @@ func (g *hashGraph[T]) Neighbors(v1 T, f func(T)) {
 	}
 }
 
+//Utility print function
 func (g *hashGraph[T]) Print() {
 	fmt.Println("Graph:")
 	for v, neighbors := range g.vertices {
@@ -77,18 +78,18 @@ func (g *hashGraph[T]) Print() {
 	}
 }
 
-//test Neighbors with dfs
+//Test Neighbors with dfs
 func (g *hashGraph[T]) DFS(v T) {
 	_, exists := g.visited_set[v]
 	if exists {
 		return
 	}
 	fmt.Printf("%v ", v)
-	g.visited_set.Add(v)
+	g.visited_set.add(v)
 	g.Neighbors(v, g.DFS)
 }
 
-//only need to demonstrate DFS once, so not necessary
+//Only need to demonstrate DFS once, so not necessary
 // but it is available if need to search again
 func (g *hashGraph[T]) ClearVisited() {
 	g.visited_set = EmptySet[T]()

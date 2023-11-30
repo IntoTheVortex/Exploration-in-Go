@@ -5,14 +5,19 @@ import (
 	"main/graph"
 )
 
+//This function shows that the Graph interface is 
+// implemented by hashGraph. If there is an error here,
+// it means that the interface is *not* implemented correctly.
 func DemonstrateInterface[T comparable](t T) graph.Graph[T] {
 	return graph.Empty[T]()
 }
 
 func main() {
+	//Instantiate the graphs
 	graphInt := graph.Empty[int]()
 	graphStr := graph.Empty[string]()
 
+	//Build the two graphs
 	c := 'A'
 	v_prev := 0
 	c_prev := c
@@ -36,16 +41,19 @@ func main() {
 	graphInt.AddEdge(0, 9)
 	graphInt.AddEdge(100, 100)
 
+	//Print out the graphs
 	fmt.Printf("\nInt ")
 	graphInt.Print()
 	fmt.Printf("\nString ")
 	graphStr.Print()
-	fmt.Println("\nDepth-First Search:")
+
+	//Demonstrate DFS on graphInt, starting on 
+	// vertex 2
+	fmt.Println("\nDepth-First Search on Int Graph:")
 	graphInt.DFS(2)
 
-	//fixed packages, now these are illegal:
+	//Fixed privacy issues, now these are illegal:
 	//graphInt.vertices[1] = make(map[int]struct{})
 	//graphInt.vertices[1][99] = struct{}{}
 	//graphInt.Print()
-
 }

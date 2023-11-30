@@ -5,4 +5,5 @@ type Graph[V comparable] interface {
 	AddVertex(V)
 	AddEdge(V, V)
 	Neighbors(V, func(V))
+	DFS(V)
 }
